@@ -1,0 +1,92 @@
+{% load static %}
+<ul class="navbar-nav custom-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">CCMS</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Computer -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComputer"
+            aria-expanded="true" aria-controls="collapseComputer">
+            <i class="fas fa-fw fa-laptop"></i>
+            <span>Computer Management</span>
+        </a>
+        <div id="collapseComputer" class="collapse" aria-labelledby="headingComputer" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'add_computer' %}">Add Computer</a>
+                <a class="collapse-item" href="{% url 'manage_computer' %}">Manage Computers</a>
+                
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - User Details -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+            aria-expanded="true" aria-controls="collapseUser">
+            <i class="fas fa-fw fa-users"></i>
+            <span>User Management</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{% url 'add_user' %}">Add User</a>
+                <a class="collapse-item" href="{% url 'manage_user' %}">Manage New Users</a>
+                <a class="collapse-item" href="{% url 'manage_old_user' %}">Manage Old Users</a>
+                <a class="collapse-item" href="{% url 'total_users' %}">Total Users</a>
+                
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Search -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'search' %}">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <span>Search</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Between Date Report -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'between_date_report' %}">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Between Date Report</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+</ul>
+
+<style>
+    .custom-sidebar {
+        background: #c31432;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+</style>

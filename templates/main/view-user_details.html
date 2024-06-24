@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">View Cyber User</h1>
+    </div>
+
+    <div class="row">
+        {% include 'includes/messages.html' %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Entry ID</th>
+                <td>{{ user.entryid }}</td>
+            </tr>
+            <tr>
+                <th>Full Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Mobile Number</th>
+                <td>{{ user.mobilenumber }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <th>ID Proof Number</th>
+                <td>{{ user.idproof }}</td>
+            </tr>
+            <tr>
+                <th>Computer Used</th>
+                <td>{{ user.computeruse.compname }}</td>
+            </tr>
+            <tr>
+                <th>Entry Date/Entry Time</th>
+                <td>{{ user.created_at }}</td>
+            </tr>
+            <tr>
+                <th>Remark</th>
+                <td>{{ user.remark }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ user.status }}</td>
+            </tr>
+            <tr>
+                <th>Fee</th>
+                <td>{{ user.fees }}</td>
+            </tr>
+            <tr>
+                <th>Out Time</th>
+                <td>{{ user.updated_at }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

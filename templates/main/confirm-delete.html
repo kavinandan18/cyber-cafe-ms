@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Confirm Delete</h1>
+</div>
+
+<div class="row">
+    <p>Are you sure you want to delete user {{ user.name }}?</p>
+    <form method="POST" action="{% url 'delete_user' user.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'manage_user' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

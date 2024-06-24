@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Search User Details</h1>
+
+    <!-- Search Form -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Search (By Entry ID)</h6>
+        </div>
+        <div class="card-body">
+            <form class="user" method="GET">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <input type="text" id="query" name="query" class="form-control" placeholder="Enter Entry ID" required>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Search</button>
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+
+    <!-- Display Messages -->
+    {% include 'includes/messages.html' %}
+
+    <!-- Search Results Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Search Results</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Entry ID</th>
+                            <th>Name of User</th>
+                            <th>Email</th>
+                            <th>Mobile Number</th>
+                            <th>Computer Used</th>
+                            <th>Entry Date/Time</th>
+                            <th>Status</th>
+                            <th>Checkout Date/Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in cyberusers %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user.entryid }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.mobilenumber }}</td>
+                                <td>{{ user.computeruse.compname }}</td>
+                                <td>{{ user.created_at|date:"M d, Y H:i A" }}</td>
+                                <td>{{ user.status }}</td>
+                                <td>{{ user.updated_at|date:"M d, Y H:i A" }}</td>
+                                <td><a href="{% url 'view_old_user' user.id %}" class="btn btn-success btn-sm">View</a></td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="10">No records found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

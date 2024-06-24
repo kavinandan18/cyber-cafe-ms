@@ -129,14 +129,14 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+ccms_venv
 # Spyder project settings
 .spyderproject
 .spyproject
 
 # Rope project settings
 .ropeproject
-
+media
 # mkdocs documentation
 /site
 

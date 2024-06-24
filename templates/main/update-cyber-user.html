@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+<!-- Page Heading -->
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Update Cyber User Details</h1>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-xl-10 col-md-12 mb-12">
+        <div class="card border-left-warning shadow h-100 py-10">
+            <div class="card-body">
+                {% include 'includes/messages.html' %}
+                
+                <form class="user" method="POST" action="{% url 'update_user' user.id %}">
+                    {% csrf_token %}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tr>
+                            <th>Entry ID</th>
+                            <td>{{ user.entryid }}</td>
+                        </tr>
+                        <tr>
+                            <th>Full Name</th>
+                            <td><input type="text" name="name" class="form-control" value="{{ user.name }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><input type="email" name="email" class="form-control" value="{{ user.email }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Mobile Number</th>
+                            <td><input type="text" name="mobilenumber" class="form-control" value="{{ user.mobilenumber }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><input type="text" name="address" class="form-control" value="{{ user.address }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>ID Proof Number</th>
+                            <td><input type="text" name="idproof" class="form-control" value="{{ user.idproof }}" required></td>
+                        </tr>
+                        <tr>
+                            <th>Computer Used</th>
+                            <td>
+                                <select name="computeruse_id" class="form-control" required>
+                                    {% for comp in computers %}
+                                        <option value="{{ comp.id }}" {% if user.computeruse.id == comp.id %} selected {% endif %}>
+                                            {{ comp.compname }} ({{ comp.comploc }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Entry Date/Entry Time</th>
+                            <td>{{ user.created_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>Remark</th>
+                            <td>{{ user.remark }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{{ user.status }}</td>
+                        </tr>
+                        <tr>
+                            <th>Out Time</th>
+                            <td>{{ user.updated_at }}</td>
+                        </tr>
+                    </table>
+
+                    <div class="form-group">
+                        <label for="remark">Remark</label>
+                        <input type="text" name="remark" class="form-control" id="remark" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input type="text" name="status" class="form-control" id="status" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fees">Fees</label>
+                        <input type="number" name="fees" class="form-control" value="{{ user.fees }}" required>
+                    </div>
+                    
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    
+                    <button type="submit" class="btn btn-success btn-user btn-block">Update</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

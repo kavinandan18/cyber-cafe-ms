@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Total Computer Card -->
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-0 shadow-lg">
+            <div class="card-body gradient-primary-hover">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
+                            Total Computers</div>
+                        <div class="h5 mb-0 font-weight-bold text-white">{{ computer_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'manage_computer' %}" class="btn btn-primary btn-sm">View Computers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Users Card -->
+    <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-0 shadow-lg">
+            <div class="card-body gradient-success-hover">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
+                            Total Users</div>
+                        <div class="h5 mb-0 font-weight-bold text-white">{{ user_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'total_users' %}" class="btn btn-success btn-sm">View Users</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.row -->
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .gradient-primary-hover {
+        background: linear-gradient(to right, #667eea, #764ba2);
+        color: #fff;
+    }
+
+    .gradient-success-hover {
+        background: linear-gradient(to right, #17ea8c, #00c6fb);
+        color: #fff;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+        background-color: #764ba2 !important;
+        border-color: #764ba2 !important;
+    }
+
+    .btn-success:hover {
+        background-color: #00c6fb !important;
+        border-color: #00c6fb !important;
+    }
+</style>
+
+{% endblock %}

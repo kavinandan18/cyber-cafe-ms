@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+<!-- Page Heading -->
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Between Dates Reports</h1>
+   
+</div>
+
+<div class="row">
+   
+    <div class="col-xl-10 col-md-12 mb-12">
+        <div class="card border-left-warning shadow h-100 py-10">
+            <div class="card-body">
+                <div>
+                    
+                    <form class="user" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="col-sm-2 col-form-label">From Date</label>
+                            <input type="date" id="fdate" name="fdate" value="fdate" class="form-control" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-form-label">To Date</label>
+                            <input type="date" id="todate" name="todate" value="todate" class="form-control" required="">
+                        </div>
+                       
+                     
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+                        <hr>
+                   
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+
+<br>
+
+<div class="row">
+    
+    {% include 'includes/messages.html' %}
+    
+    
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        
+        
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Entry ID</th>
+                <th>Name  of User</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Cabin User</th>
+                <th>Entry Date/Entry Time</th>
+                <th>Status</th>
+                <th>Checkout Date/Checkout Time</th>
+                <th>Action</th>
+               
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>S.No</th>
+                <th>Entry ID</th>
+                <th>Name  of User</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Cabin User</th>
+                <th>Entry Date/Entry Time</th>
+                <th>Status</th>
+                <th>Checkout Date/Checkout Time</th>
+                <th>Action</th>
+               
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for i in data %}
+            
+            
+            <tr>
+                <td>{{ i.id}}</td>
+                <td>{{ i.entryid}}</td>
+                <td>{{ i.name}}</td>
+                <td>{{ i.email}}</td>
+                <td>{{ i.mobilenumber}}</td>
+                <td>{{ i.computeruse_id.compname}}</td>
+                <td>{{ i.created_at}}</td>
+                {% if i.status == 'Checkout' %}
+                <td>{{ i.status}}</td>
+                {% else %}                <td>Not Updated Yet</td>{% endif %}
+                <td>{{ i.updated_at}}</td>
+                <td><a href="{% url 'view_user_details' i.id %}" class="btn btn-success">View </a></td>
+               
+            </tr>
+            <tr>
+                {% empty %}
+                <td colspan="12">No Record found.</td></tr>
+            {% endfor %}
+           
+        </tbody>
+    </table>
+</div>
+
+<!-- Content Row -->
+
+{% endblock %}

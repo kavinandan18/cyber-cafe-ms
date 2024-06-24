@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Admin Profile</h1>
+</div>
+
+<div class="row">
+    <div class="col-xl-10 col-md-12 mb-12">
+        <div class="card border-left-warning shadow h-100 py-10">
+            <div class="card-body">
+                {% include 'includes/messages.html' %}
+                <form class="user" method="POST" action="{% url 'profile_update' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">First Name</label>
+                        <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <input type="email" class="form-control" name="email" value="{{ user.email }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">Username</label>
+                        <input type="text" class="form-control" name="username" value="{{ user.username }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">Profile Picture</label>
+                        <input type="file" class="form-control" name="profile_pic" id="profile_pic">
+                        <div class="profile-pic-container mt-2">
+                            {% if user.profile_pic %}
+                            <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="rounded-circle profile-pic-preview" id="profile-pic-preview">
+                            <p id="profile-pic-name">{{ user.profile_pic.name }}</p>
+                            {% else %}
+                            <img src="#" alt="Profile Picture" class="rounded-circle profile-pic-preview" id="profile-pic-preview" style="display: none;">
+                            <p id="profile-pic-name"></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-user btn-block">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .profile-pic-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .profile-pic-preview {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .profile-pic-container p {
+        margin: 0;
+    }
+</style>
+
+<script>
+    document.getElementById('profile_pic').addEventListener('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('profile-pic-preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+        var fileName = event.target.files[0].name;
+        document.getElementById('profile-pic-name').textContent = fileName;
+    });
+</script>
+
+{% endblock %}
